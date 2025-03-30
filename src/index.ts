@@ -193,11 +193,9 @@ async function main() {
     // Register all tools
     registerAllTools(server);
     
-    // Configure transport to use pure stdio with no debug output
-    // 配置传输以使用纯stdio，没有调试输出
-    const transport = new StdioServerTransport({
-      debug: false  // Important: disable any debug output from the transport
-    });
+    // Configure transport to use pure stdio
+    // 配置传输以使用纯stdio
+    const transport = new StdioServerTransport();
     
     // Connect to stdio transport
     await server.connect(transport);
