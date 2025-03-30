@@ -6,6 +6,22 @@
  * CCXT MCP 服务器
  * 具有优化缓存和速率限制的高性能加密货币交易所接口
  */
+
+// IMPORTANT: Redirect all console output to stderr to avoid messing with MCP protocol
+// This must be done before any imports that may log to console
+// 重要：将所有控制台输出重定向到stderr，避免干扰MCP协议
+// 这必须在任何可能记录到控制台的导入之前完成
+const originalConsoleLog = console.log;
+const originalConsoleInfo = console.info;
+const originalConsoleWarn = console.warn;
+const originalConsoleDebug = console.debug;
+
+console.log = (...args) => console.error('[LOG]', ...args);
+console.info = (...args) => console.error('[INFO]', ...args);
+console.warn = (...args) => console.error('[WARN]', ...args);
+console.debug = (...args) => console.error('[DEBUG]', ...args);
+
+// Now we can safely import modules
 import { McpServer, ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -177,7 +193,13 @@ async function main() {
     // Register all tools
     registerAllTools(server);
     
-    const transport = new StdioServerTransport();
+    // Configure transport to use pure stdio with no debug output
+    // 配置传输以使用纯stdio，没有调试输出
+    const transport = new StdioServerTransport({
+      debug: false  // Important: disable any debug output from the transport
+    });
+    
+    // Connect to stdio transport
     await server.connect(transport);
     
     log(LogLevel.INFO, "CCXT MCP Server is running");
@@ -187,4 +209,15 @@ async function main() {
   }
 }
 
+// Handle process signals
+process.on('uncaughtException', (error) => {
+  log(LogLevel.ERROR, `Uncaught exception: ${error.message}`);
+  log(LogLevel.ERROR, error.stack || 'No stack trace');
+});
+
+process.on('unhandledRejection', (reason) => {
+  log(LogLevel.ERROR, `Unhandled rejection: ${reason}`);
+});
+
+// Start the MCP server
 main();
