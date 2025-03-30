@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa" rx="10" ry="10" />
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">MCP-CCXT Code Architecture</text>
+  
+  <!-- Main modules -->
+  <g transform="translate(50, 80)">
+    <!-- Core Module Box -->
+    <rect x="0" y="0" width="700" height="440" rx="8" ry="8" fill="#e9ecef" stroke="#ced4da" stroke-width="2" />
+    <text x="350" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#495057">MCP-CCXT Server</text>
+    
+    <!-- Exchange Module -->
+    <g transform="translate(50, 60)">
+      <rect x="0" y="0" width="180" height="160" rx="5" ry="5" fill="#4dabf7" stroke="#339af0" stroke-width="2" opacity="0.8" />
+      <text x="90" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">Exchange</text>
+      <rect x="20" y="50" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#339af0" stroke-width="1" />
+      <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">manager.ts</text>
+      <text x="90" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• Exchange instances</text>
+      <text x="90" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• Credentials mgmt</text>
+      <text x="90" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• Symbol validation</text>
+    </g>
+    
+    <!-- Utils Module -->
+    <g transform="translate(260, 60)">
+      <rect x="0" y="0" width="180" height="160" rx="5" ry="5" fill="#20c997" stroke="#12b886" stroke-width="2" opacity="0.8" />
+      <text x="90" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">Utils</text>
+      <rect x="20" y="50" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#12b886" stroke-width="1" />
+      <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">cache.ts</text>
+      <rect x="20" y="85" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#12b886" stroke-width="1" />
+      <text x="90" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">rate-limiter.ts</text>
+      <rect x="20" y="120" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#12b886" stroke-width="1" />
+      <text x="90" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">logging.ts</text>
+    </g>
+    
+    <!-- Tools Module -->
+    <g transform="translate(470, 60)">
+      <rect x="0" y="0" width="180" height="160" rx="5" ry="5" fill="#ffa94d" stroke="#ff922b" stroke-width="2" opacity="0.8" />
+      <text x="90" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">Tools</text>
+      <rect x="20" y="50" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#ff922b" stroke-width="1" />
+      <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">public.ts</text>
+      <rect x="20" y="85" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#ff922b" stroke-width="1" />
+      <text x="90" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">private.ts</text>
+      <rect x="20" y="120" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#ff922b" stroke-width="1" />
+      <text x="90" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">index.ts</text>
+    </g>
+    
+    <!-- Main File -->
+    <g transform="translate(200, 250)">
+      <rect x="0" y="0" width="300" height="60" rx="5" ry="5" fill="#748ffc" stroke="#5c7cfa" stroke-width="2" opacity="0.8" />
+      <text x="150" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">index.ts (Main Entry Point)</text>
+    </g>
+    
+    <!-- Arrows -->
+    <line x1="140" y1="220" x2="200" y2="250" stroke="#adb5bd" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="350" y1="220" x2="350" y2="250" stroke="#adb5bd" stroke-width="2" marker-end="url(#arrowhead)" />
+    <line x1="560" y1="220" x2="500" y2="250" stroke="#adb5bd" stroke-width="2" marker-end="url(#arrowhead)" />
+    
+    <!-- Public APIs -->
+    <g transform="translate(50, 340)">
+      <rect x="0" y="0" width="600" height="70" rx="5" ry="5" fill="#339af0" stroke="#1c7ed6" stroke-width="2" opacity="0.7" />
+      <text x="300" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">MCP Tools &amp; Resources</text>
+      <text x="300" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff">get-ticker, get-orderbook, get-ohlcv, batch-get-tickers, etc.</text>
+    </g>
+    
+    <!-- Arrow to APIs -->
+    <line x1="350" y1="310" x2="350" y2="340" stroke="#adb5bd" stroke-width="2" marker-end="url(#arrowhead)" />
+  </g>
+  
+  <!-- Legend -->
+  <g transform="translate(50, 540)">
+    <rect x="0" y="0" width="20" height="20" fill="#4dabf7" opacity="0.8" />
+    <text x="30" y="15" font-family="Arial, sans-serif" font-size="14" fill="#495057">Exchange Management</text>
+    
+    <rect x="200" y="0" width="20" height="20" fill="#20c997" opacity="0.8" />
+    <text x="230" y="15" font-family="Arial, sans-serif" font-size="14" fill="#495057">Utilities</text>
+    
+    <rect x="400" y="0" width="20" height="20" fill="#ffa94d" opacity="0.8" />
+    <text x="430" y="15" font-family="Arial, sans-serif" font-size="14" fill="#495057">API Tools</text>
+    
+    <rect x="600" y="0" width="20" height="20" fill="#748ffc" opacity="0.8" />
+    <text x="630" y="15" font-family="Arial, sans-serif" font-size="14" fill="#495057">Core Files</text>
+  </g>
+  
+  <!-- Arrowhead marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#adb5bd" />
+    </marker>
+  </defs>
+</svg>
