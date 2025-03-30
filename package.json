@@ -1,6 +1,6 @@
 {
   "name": "@mcpfun/mcp-server-ccxt",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "High-performance CCXT MCP server for cryptocurrency exchange integration",
   "main": "build/index.js",
   "type": "module",
@@ -10,6 +10,7 @@
   "files": [
     "bin/",
     "build/",
+    "assets/",
     "LICENSE.txt",
     "README.md"
   ],
@@ -41,11 +42,11 @@
     "mcp",
     "language-model"
   ],
-  "author": "Shuhao",
+  "author": "Doggybee",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuhaozhang95/mcp-server-ccxt.git"
+    "url": "git+https://github.com/doggybee/mcp-server-ccxt.git"
   },
   "engines": {
     "node": ">=14.0.0"
