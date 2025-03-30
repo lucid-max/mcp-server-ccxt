@@ -1,5 +1,7 @@
 # CCXT MCP Server
 
+<img src="assets/ccxt-logo.png" alt="CCXT Logo" width="100" height="100"/>
+
 CCXT MCP Server is a high-performance cryptocurrency exchange integration server built on the Model Context Protocol (MCP). It enables language models and other MCP clients to interact with cryptocurrency exchanges in a standardized, efficient way.
 
 ![CCXT MCP Server Integration Architecture](docs/images/mcp-integration.svg)
@@ -53,7 +55,7 @@ Alternatively, you can clone and build the repository:
 
 ```bash
 # Clone the repository
-git clone https://github.com/shuhaozhang95/mcp-server-ccxt.git
+git clone https://github.com/doggybee/mcp-server-ccxt.git
 cd mcp-server-ccxt
 
 # Install dependencies
@@ -282,6 +284,36 @@ This software is provided for informational purposes only. Using this software t
 
 This project is licensed under the MIT License - see the [LICENSE.txt](LICENSE.txt) file for details.
 
+## Copyright and Attribution
+
+This project uses the CCXT library (https://github.com/ccxt/ccxt), which is:
+
+```
+Copyright (c) 2016-2024 CCXT developers
+```
+
+CCXT is released under the MIT License, which is included below:
+
+```
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
 ---
 
-For issues, feature requests, or contributions, please visit [the GitHub repository](https://github.com/shuhaozhang95/mcp-server-ccxt).
+For issues, feature requests, or contributions, please visit [the GitHub repository](https://github.com/doggybee/mcp-server-ccxt).
