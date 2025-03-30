@@ -1,5 +1,6 @@
 # CCXT MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@doggybee/mcp-server-ccxt)](https://smithery.ai/server/@doggybee/mcp-server-ccxt)
 <img src="assets/ccxt-logo.png" alt="CCXT Logo" width="100" height="100"/>
 
 CCXT MCP Server is a high-performance cryptocurrency exchange integration server built on the Model Context Protocol (MCP). It enables language models and other MCP clients to interact with cryptocurrency exchanges in a standardized, efficient way.
@@ -36,6 +37,14 @@ The server is organized into three main modules for better maintainability and e
 - HTX (Huobi)
 
 ## Installation
+
+### Installing via Smithery
+
+To install mcp-server-ccxt for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@doggybee/mcp-server-ccxt):
+
+```bash
+npx -y @smithery/cli install @doggybee/mcp-server-ccxt --client claude
+```
 
 ### NPM Package (Recommended)
 
