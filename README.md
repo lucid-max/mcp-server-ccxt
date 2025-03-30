@@ -35,6 +35,22 @@ The server is organized into three main modules for better maintainability and e
 
 ## Installation
 
+### NPM Package (Recommended)
+
+You can install CCXT MCP Server from npm:
+
+```bash
+# Install globally
+npm install -g @mcpfun/mcp-server-ccxt
+
+# Start the server
+mcp-server-ccxt
+```
+
+### Manual Installation
+
+Alternatively, you can clone and build the repository:
+
 ```bash
 # Clone the repository
 git clone https://github.com/shuhaozhang95/mcp-server-ccxt.git
@@ -45,6 +61,9 @@ npm install
 
 # Build the server
 npm run build
+
+# Start the server
+npm start
 ```
 
 ## Configuration
@@ -79,6 +98,10 @@ npm run build
 Start the server:
 
 ```bash
+# If installed globally via npm
+mcp-server-ccxt
+
+# If installed manually
 npm start
 ```
 
@@ -86,6 +109,18 @@ npm start
 
 1. Add the server to your `claude_desktop_config.json`:
 
+If installed via npm (globally):
+```json
+{
+  "mcpServers": {
+    "ccxt": {
+      "command": "mcp-server-ccxt"
+    }
+  }
+}
+```
+
+If installed manually:
 ```json
 {
   "mcpServers": {
@@ -100,6 +135,18 @@ npm start
 ```
 
 2. Restart Claude for Desktop
+
+### Using as a Module in Another Project
+
+You can also use this package as a module in your own Node.js projects:
+
+```javascript
+// Import the CCXT MCP Server
+import '@mcpfun/mcp-server-ccxt';
+
+// The server starts automatically when imported
+// You can configure it through environment variables
+```
 
 ### Example Queries
 
