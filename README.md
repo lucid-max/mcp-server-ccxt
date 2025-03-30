@@ -72,6 +72,8 @@ npm run build
 
 ## Usage
 
+> **Note**: If you encounter any issues with MCP communication, please see the [Troubleshooting Guide](docs/troubleshooting.md) for solutions.
+
 ### Running the Server
 
 Start the server:
