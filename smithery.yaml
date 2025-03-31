@@ -7,22 +7,6 @@ startCommand:
     type: object
     required: []
     properties:
-      binanceApiKey:
-        type: string
-        default: ""
-        description: API key for Binance.
-      binanceSecret:
-        type: string
-        default: ""
-        description: Secret for Binance.
-      coinbaseApiKey:
-        type: string
-        default: ""
-        description: API key for Coinbase.
-      coinbaseSecret:
-        type: string
-        default: ""
-        description: Secret for Coinbase.
       defaultExchange:
         type: string
         default: binance
@@ -34,16 +18,8 @@ startCommand:
       command: 'npm',
       args: ['start'],
       env: {
-        BINANCE_API_KEY: config.binanceApiKey || '',
-        BINANCE_SECRET: config.binanceSecret || '',
-        COINBASE_API_KEY: config.coinbaseApiKey || '',
-        COINBASE_SECRET: config.coinbaseSecret || '',
         DEFAULT_EXCHANGE: config.defaultExchange || 'binance'
       }
     })
   exampleConfig:
-    binanceApiKey: exampleBinanceKey
-    binanceSecret: exampleBinanceSecret
-    coinbaseApiKey: exampleCoinbaseKey
-    coinbaseSecret: exampleCoinbaseSecret
     defaultExchange: binance
