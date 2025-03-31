@@ -8,6 +8,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { registerPublicTools } from './public.js';
 import { registerPrivateTools } from './private.js';
+import { registerConfigTools } from './config.js';
 import { log, LogLevel } from '../utils/logging.js';
 
 /**
@@ -26,6 +27,10 @@ export function registerAllTools(server: McpServer) {
     // Register private API tools
     registerPrivateTools(server);
     log(LogLevel.INFO, "Private API tools registered successfully");
+    
+    // Register configuration tools
+    registerConfigTools(server);
+    log(LogLevel.INFO, "Configuration tools registered successfully");
   } catch (error) {
     log(LogLevel.ERROR, `Error registering tools: ${error instanceof Error ? error.message : String(error)}`);
     throw error;

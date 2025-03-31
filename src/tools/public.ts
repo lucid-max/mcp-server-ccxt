@@ -7,7 +7,7 @@
  */
 import { z } from 'zod';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { getExchange, validateSymbol, SUPPORTED_EXCHANGES } from '../exchange/manager.js';
+import { getExchange, getExchangeWithMarketType, validateSymbol, SUPPORTED_EXCHANGES, MarketType } from '../exchange/manager.js';
 import { getCachedData } from '../utils/cache.js';
 import { rateLimiter } from '../utils/rate-limiter.js';
 import { log, LogLevel } from '../utils/logging.js';
@@ -30,12 +30,15 @@ export function registerPublicTools(server: McpServer) {
   // 获取行情信息
   server.tool("get-ticker", "Get current ticker information for a trading pair", {
     exchange: z.string().describe("Exchange ID (e.g., binance, coinbase)"),
-    symbol: z.string().describe("Trading pair symbol (e.g., BTC/USDT)")
-  }, async ({ exchange, symbol }) => {
+    symbol: z.string().describe("Trading pair symbol (e.g., BTC/USDT)"),
+    marketType: z.enum(["spot", "future", "swap", "option", "margin"]).optional().describe("Market type (default: spot)")
+  }, async ({ exchange, symbol, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
-        const ex = getExchange(exchange);
-        const cacheKey = `ticker:${exchange}:${symbol}`;
+        const ex = marketType 
+          ? getExchangeWithMarketType(exchange, marketType)
+          : getExchange(exchange);
+        const cacheKey = `ticker:${exchange}:${marketType || 'spot'}:${symbol}`;
         
         const ticker = await getCachedData(cacheKey, async () => {
           log(LogLevel.INFO, `Fetching ticker for ${symbol} on ${exchange}`);
@@ -65,12 +68,15 @@ export function registerPublicTools(server: McpServer) {
   // 批量获取行情
   server.tool("batch-get-tickers", "Get ticker information for multiple trading pairs at once", {
     exchange: z.string().describe("Exchange ID (e.g., binance, coinbase)"),
-    symbols: z.array(z.string()).describe("List of trading pair symbols (e.g., ['BTC/USDT', 'ETH/USDT'])")
-  }, async ({ exchange, symbols }) => {
+    symbols: z.array(z.string()).describe("List of trading pair symbols (e.g., ['BTC/USDT', 'ETH/USDT'])"),
+    marketType: z.enum(["spot", "future", "swap", "option", "margin"]).optional().describe("Market type (default: spot)")
+  }, async ({ exchange, symbols, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
-        const ex = getExchange(exchange);
-        const cacheKey = `tickers:${exchange}:${symbols.join(',')}`;
+        const ex = marketType 
+          ? getExchangeWithMarketType(exchange, marketType)
+          : getExchange(exchange);
+        const cacheKey = `tickers:${exchange}:${marketType || 'spot'}:${symbols.join(',')}`;
         
         const tickers = await getCachedData(cacheKey, async () => {
           log(LogLevel.INFO, `Batch fetching tickers for ${symbols.length} symbols on ${exchange}`);
@@ -255,12 +261,15 @@ export function registerPublicTools(server: McpServer) {
   // Get exchange information
   // 获取交易所信息
   server.tool("get-exchange-info", "Get exchange information and status", {
-    exchange: z.string().describe("Exchange ID (e.g., binance, coinbase)")
-  }, async ({ exchange }) => {
+    exchange: z.string().describe("Exchange ID (e.g., binance, coinbase)"),
+    marketType: z.enum(["spot", "future", "swap", "option", "margin"]).optional().describe("Market type (default: spot)")
+  }, async ({ exchange, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
-        const ex = getExchange(exchange);
-        const cacheKey = `status:${exchange}`;
+        const ex = marketType 
+          ? getExchangeWithMarketType(exchange, marketType)
+          : getExchange(exchange);
+        const cacheKey = `status:${exchange}:${marketType || 'spot'}`;
         
         const info = await getCachedData(cacheKey, async () => {
           log(LogLevel.INFO, `Fetching status information for ${exchange}`);
@@ -286,5 +295,157 @@ export function registerPublicTools(server: McpServer) {
     }
   });
 
-  log(LogLevel.INFO, "Public API tools registered successfully");
+  // Get futures leverage tiers
+  // 获取期货杠杆级别
+  server.tool("get-leverage-tiers", "Get futures leverage tiers for trading pairs", {
+    exchange: z.string().describe("Exchange ID (e.g., binance, bybit)"),
+    symbol: z.string().optional().describe("Trading pair symbol (optional, e.g., BTC/USDT)"),
+    marketType: z.enum(["future", "swap"]).default("future").describe("Market type (default: future)")
+  }, async ({ exchange, symbol, marketType }) => {
+    try {
+      return await rateLimiter.execute(exchange, async () => {
+        // Get futures exchange
+        const ex = getExchangeWithMarketType(exchange, marketType);
+        const cacheKey = `leverage_tiers:${exchange}:${marketType}:${symbol || 'all'}`;
+        
+        const tiers = await getCachedData(cacheKey, async () => {
+          log(LogLevel.INFO, `Fetching leverage tiers for ${symbol || 'all symbols'} on ${exchange} (${marketType})`);
+          if (symbol) {
+            return await ex.fetchMarketLeverageTiers(symbol);
+          } else {
+            return await ex.fetchLeverageTiers();
+          }
+        }, 3600000); // Cache for 1 hour
+        
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify(tiers, null, 2)
+          }]
+        };
+      });
+    } catch (error) {
+      log(LogLevel.ERROR, `Error fetching leverage tiers: ${error instanceof Error ? error.message : String(error)}`);
+      return {
+        content: [{
+          type: "text",
+          text: `Error: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  });
+  
+  // Get funding rates
+  // 获取资金费率
+  server.tool("get-funding-rates", "Get current funding rates for perpetual contracts", {
+    exchange: z.string().describe("Exchange ID (e.g., binance, bybit)"),
+    symbols: z.array(z.string()).optional().describe("List of trading pair symbols (optional)"),
+    marketType: z.enum(["future", "swap"]).default("swap").describe("Market type (default: swap)")
+  }, async ({ exchange, symbols, marketType }) => {
+    try {
+      return await rateLimiter.execute(exchange, async () => {
+        // Get futures exchange
+        const ex = getExchangeWithMarketType(exchange, marketType);
+        const cacheKey = `funding_rates:${exchange}:${marketType}:${symbols ? symbols.join(',') : 'all'}`;
+        
+        const rates = await getCachedData(cacheKey, async () => {
+          log(LogLevel.INFO, `Fetching funding rates for ${symbols ? symbols.length : 'all'} symbols on ${exchange} (${marketType})`);
+          if (symbols) {
+            return await ex.fetchFundingRates(symbols);
+          } else {
+            return await ex.fetchFundingRates();
+          }
+        }, 300000); // Cache for 5 minutes
+        
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify(rates, null, 2)
+          }]
+        };
+      });
+    } catch (error) {
+      log(LogLevel.ERROR, `Error fetching funding rates: ${error instanceof Error ? error.message : String(error)}`);
+      return {
+        content: [{
+          type: "text",
+          text: `Error: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  });
+  
+  // Get exchange market types
+  // 获取交易所支持的市场类型
+  server.tool("get-market-types", "Get market types supported by an exchange", {
+    exchange: z.string().describe("Exchange ID (e.g., binance, coinbase)"),
+  }, async ({ exchange }) => {
+    try {
+      return await rateLimiter.execute(exchange, async () => {
+        const ex = getExchange(exchange);
+        // Get markets and group by contract type
+        let marketTypes = ['spot']; // Spot is always available
+        
+        // Try to access exchange's market type property if available
+        if (ex.has && ex.has.fetchMarketLeverageTiers) {
+          marketTypes.push('future');
+        }
+        
+        // Some exchanges have specific markets property
+        if (ex.markets) {
+          const markets = Object.values(ex.markets);
+          for (const market of markets) {
+            const type = (market as any).type;
+            if (type && !marketTypes.includes(type)) {
+              marketTypes.push(type);
+            }
+          }
+        }
+        
+        // Manually check for common market types
+        try {
+          const futureEx = getExchangeWithMarketType(exchange, 'future');
+          await futureEx.loadMarkets();
+          if (Object.keys(futureEx.markets).length > 0) {
+            if (!marketTypes.includes('future')) marketTypes.push('future');
+          }
+        } catch (e) {
+          // Future markets not available
+        }
+        
+        try {
+          const swapEx = getExchangeWithMarketType(exchange, 'swap');
+          await swapEx.loadMarkets();
+          if (Object.keys(swapEx.markets).length > 0) {
+            if (!marketTypes.includes('swap')) marketTypes.push('swap');
+          }
+        } catch (e) {
+          // Swap markets not available
+        }
+        
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify({
+              exchange,
+              marketTypes: [...new Set(marketTypes)], // Remove duplicates
+            }, null, 2)
+          }]
+        };
+      });
+    } catch (error) {
+      log(LogLevel.ERROR, `Error fetching market types: ${error instanceof Error ? error.message : String(error)}`);
+      return {
+        content: [{
+          type: "text",
+          text: `Error: ${error instanceof Error ? error.message : String(error)}`
+        }],
+        isError: true
+      };
+    }
+  });
+  
+  // Removed duplicate log message
 }
