@@ -190,23 +190,31 @@ Here are some example queries you can use with the MCP server:
 - `list-exchanges`: List all available cryptocurrency exchanges
 - `get-ticker`: Get current ticker information for a trading pair
 - `batch-get-tickers`: Get ticker information for multiple trading pairs at once
-- `get-orderbook`: Get market order book for a trading pair
+- `get-orderbook` / `get-order-book`: Get market order book for a trading pair
 - `get-ohlcv`: Get OHLCV candlestick data for a trading pair
 - `get-trades`: Get recent trades for a trading pair
 - `get-markets`: Get all available markets for an exchange
 - `get-exchange-info`: Get exchange information and status
 - `get-leverage-tiers`: Get futures leverage tiers
 - `get-funding-rates`: Get current funding rates
+- `get-positions`: Get open positions information
+- `get-open-orders`: Get all open orders
+- `get-order-history`: Get order history
 
 ### Private API Tools (requires API keys)
 
 - `account-balance`: Get your account balance from a crypto exchange
 - `place-market-order`: Place a market order on an exchange
+- `place-limit-order`: Place a limit order on an exchange
+- `cancel-order`: Cancel an existing order
+- `cancel-all-orders`: Cancel all open orders
 - `set-leverage`: Set leverage for futures
 - `set-margin-mode`: Set margin mode for futures
-- `place-futures-market-order`: Place futures orders
+- `place-futures-market-order`: Place futures market orders
+- `place-futures-limit-order`: Place futures limit orders
+- `transfer-funds`: Transfer funds between accounts (e.g., spot to futures)
 
-### Utility Tools
+### Configuration & Utility Tools
 
 - `cache-stats`: Get CCXT cache statistics
 - `clear-cache`: Clear CCXT cache
@@ -214,6 +222,8 @@ Here are some example queries you can use with the MCP server:
 - `get-proxy-config`: Get proxy settings
 - `set-proxy-config`: Configure proxy settings
 - `set-market-type`: Set default market type
+- `set-default-exchange`: Change the default exchange
+- `system-info`: Get system and environment information
 
 ## Performance Optimizations
 
