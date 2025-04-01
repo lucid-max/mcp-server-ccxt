@@ -18,20 +18,11 @@ startCommand:
       proxyUrl:
         type: string
         description: Proxy URL (e.g., http://proxy-server:port).
-      marketType:
-        type: string
-        enum: [spot, future, swap, option, margin]
-        default: spot
-        description: Default market type for exchanges.
       logLevel:
         type: string
         enum: [debug, info, warning, error]
         default: info
         description: Server log level.
-      cacheTTL:
-        type: number
-        default: 60000
-        description: Default cache time-to-live in milliseconds.
   commandFunction:
     # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
     |-
@@ -39,9 +30,7 @@ startCommand:
       // Prepare environment variables from config
       const env = {
         DEFAULT_EXCHANGE: config.defaultExchange || 'binance',
-        DEFAULT_MARKET_TYPE: config.marketType || 'spot',
-        LOG_LEVEL: config.logLevel || 'info',
-        CACHE_TTL: config.cacheTTL ? String(config.cacheTTL) : '60000'
+        LOG_LEVEL: config.logLevel || 'info'
       };
       
       // Add proxy configuration if enabled
@@ -58,6 +47,5 @@ startCommand:
     }
   exampleConfig:
     defaultExchange: binance
-    marketType: spot
     logLevel: info
     useProxy: false
