@@ -1,6 +1,6 @@
 {
   "name": "@mcpfun/mcp-server-ccxt",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "High-performance CCXT MCP server for cryptocurrency exchange integration",
   "main": "build/index.js",
   "type": "module",
