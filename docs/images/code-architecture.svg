@@ -62,11 +62,11 @@
     <!-- MCP Tools in config.ts -->
     <g transform="translate(50, 340)">
       <rect x="0" y="0" width="600" height="80" rx="5" ry="5" fill="#339af0" stroke="#1c7ed6" stroke-width="2" opacity="0.7" />
-      <text x="300" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">MCP Tools & Resources</text>
+      <text x="300" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">MCP Tools &amp; Resources</text>
       
       <!-- Highlight proxy config tools -->
       <rect x="20" y="35" width="560" height="35" rx="3" ry="3" fill="#e64980" stroke="#c2255c" stroke-width="1" opacity="0.8" />
-      <text x="300" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff">get-proxy-config, set-proxy-config, test-proxy-connection, set-market-type...</text>
+      <text x="300" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff">get-proxy-config, set-proxy-config, test-proxy-connection, set-market-type</text>
     </g>
     
     <!-- Arrow to APIs -->
