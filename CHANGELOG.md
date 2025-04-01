@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.2.1 (2025-04-01)
+
+### Improved Proxy Configuration
+- Updated documentation to recommend integrated proxy URL format (username:password@host)
+- Enhanced proxy configuration examples in README.md and .env.example
+- Maintained backward compatibility with separate username/password fields
+- Improved user experience by simplifying proxy setup process
+
 ## v1.2.0 (2025-03-31)
 
 ### Added Proxy Support
