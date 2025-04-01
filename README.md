@@ -108,9 +108,10 @@ npm start
    
    # Proxy configuration (optional)
    USE_PROXY=false
-   PROXY_URL=http://your-proxy-server:port
-   PROXY_USERNAME=
-   PROXY_PASSWORD=
+   PROXY_URL=http://username:password@your-proxy-server:port
+   # Legacy format (still supported but recommended to use the integrated URL format above)
+   # PROXY_USERNAME=
+   # PROXY_PASSWORD=
    ```
 
 ## Usage
