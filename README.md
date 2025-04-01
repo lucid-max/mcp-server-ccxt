@@ -2,7 +2,7 @@
 
 <img src="assets/ccxt-logo.png" alt="CCXT Logo" width="100" height="100"/>
 
-![Version](https://img.shields.io/badge/version-1.2.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.2.1-blue.svg)
 [![MCP Standard](https://img.shields.io/badge/MCP-Standard-green.svg)](https://www.modelcontextprotocol.org/)
 [![CCXT](https://img.shields.io/badge/CCXT-4.0.0-orange.svg)](https://github.com/ccxt/ccxt)
 [![smithery badge](https://smithery.ai/badge/@doggybee/mcp-server-ccxt)](https://smithery.ai/server/@doggybee/mcp-server-ccxt)
