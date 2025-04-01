@@ -1,36 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <!-- Background -->
-  <rect width="800" height="600" fill="#f8f9fa" rx="10" ry="10" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <!-- Background with softer color -->
+  <rect width="900" height="700" fill="#f8f9fa" rx="12" ry="12" />
   
   <!-- Title -->
-  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">MCP-CCXT Code Architecture v1.2.1</text>
+  <text x="450" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#333">MCP-CCXT Code Architecture v1.2.1</text>
   
   <!-- Main modules -->
-  <g transform="translate(50, 80)">
-    <!-- Core Module Box -->
-    <rect x="0" y="0" width="700" height="440" rx="8" ry="8" fill="#e9ecef" stroke="#ced4da" stroke-width="2" />
-    <text x="350" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#495057">MCP-CCXT Server</text>
+  <g transform="translate(60, 100)">
+    <!-- Core Module Box with more space -->
+    <rect x="0" y="0" width="780" height="520" rx="12" ry="12" fill="#f1f3f5" stroke="#ced4da" stroke-width="2" />
+    <text x="390" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#495057">MCP-CCXT Server</text>
     
     <!-- Exchange Module -->
-    <g transform="translate(50, 60)">
-      <rect x="0" y="0" width="180" height="160" rx="5" ry="5" fill="#4dabf7" stroke="#339af0" stroke-width="2" opacity="0.8" />
-      <text x="90" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">Exchange</text>
-      <rect x="20" y="50" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#339af0" stroke-width="1" />
-      <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">manager.ts</text>
-      <text x="90" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• Exchange instances</text>
-      <text x="90" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• Proxy configuration</text>
-      <text x="90" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• formatProxyUrl</text>
-      <text x="90" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff">• Symbol validation</text>
+    <g transform="translate(60, 80)">
+      <rect x="0" y="0" width="200" height="180" rx="8" ry="8" fill="#4dabf7" stroke="#339af0" stroke-width="2" opacity="0.8" />
+      <text x="100" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">Exchange</text>
+      <rect x="25" y="60" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#339af0" stroke-width="1" />
+      <text x="100" y="83" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">manager.ts</text>
+      <text x="100" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff">• Exchange instances</text>
+      <text x="100" y="145" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff">• Proxy configuration</text>
+      <text x="100" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff">• Symbol validation</text>
     </g>
     
     <!-- Utils Module -->
-    <g transform="translate(260, 60)">
-      <rect x="0" y="0" width="180" height="160" rx="5" ry="5" fill="#20c997" stroke="#12b886" stroke-width="2" opacity="0.8" />
-      <text x="90" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#fff">Utils</text>
-      <rect x="20" y="50" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#12b886" stroke-width="1" />
-      <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">cache.ts</text>
-      <rect x="20" y="85" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#12b886" stroke-width="1" />
-      <text x="90" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#495057">rate-limiter.ts</text>
-      <rect x="20" y="120" width="140" height="30" rx="3" ry="3" fill="#fff" stroke="#12b886" stroke-width="1" />
-      <text x="90" y="140" text-anchor="middle" font-family="Arial
+    <g transform="translate(290, 80)">
+      <rect x="0" y="0" width="200" height="180" rx="8" ry="8" fill="#20c997" stroke="#12b886" stroke-width="2" opacity="0.8" />
+      <text x="100" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">Utils</text>
+      <rect x="25" y="60" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#12b886" stroke-width="1" />
+      <text x="100" y="83" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">cache.ts</text>
+      <rect x="25" y="105" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#12b886" stroke-width="1" />
+      <text x="100" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">rate-limiter.ts</text>
+      <rect x="25" y="150" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#12b886" stroke-width="1" />
+      <text x="100" y="173" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">logging.ts</text>
+    </g>
+    
+    <!-- Tools Module -->
+    <g transform="translate(520, 80)">
+      <rect x="0" y="0" width="200" height="180" rx="8" ry="8" fill="#ffa94d" stroke="#ff922b" stroke-width="2" opacity="0.8" />
+      <text x="100" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">Tools</text>
+      <rect x="25" y="60" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#ff922b" stroke-width="1" />
+      <text x="100" y="83" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">public.ts</text>
+      <rect x="25" y="105" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#ff922b" stroke-width="1" />
+      <text x="100" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">private.ts</text>
+      <rect x="25" y="150" width="150" height="36" rx="4" ry="4" fill="#fff" stroke="#ff922b" stroke-width="1" />
+      <text x="100" y="173" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#495057">config.ts</text>
+    </g>
+    
+    <!-- Main File -->
+    <g transform="translate(240, 300)">
+      <rect x="0" y="0" width="300" height="70" rx="8" ry="8" fill="#748ffc" stroke="#5c7cfa" stroke-width="2" opacity="0.8" />
+      <text x="150" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#fff">index.ts (Main Entry Point)</text>
+    </g>
+    
+    <!-- Arrows with more graceful lines -->
+    <line x1="160" y1="260" x2="240" y2="330" stroke="#adb5bd" stroke-width="2.5" marker-end="url(#arrowhead)" />
+    <line x1="390" y1="260" x2="390" y2="300" stroke="#adb5bd" stroke-width="2.5" marker-end="url(#arrowhead)" />
+    <line x1="620" y1="260" x2="540" y2="330" stroke="#adb5bd" stroke-width="2.5" marker-end="url(#arrowhead)" />
+    
+    <!-- MCP Tools in config.ts -->
+    <g transform="translate(40, 410)">
+      <rect x="0" y="0" width="700" height="90" rx="8" ry="8" fill="#339af0" stroke="#1c7ed6" stroke-width="2" opacity="0.7" />
+      <text x="350" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#fff">MCP Tools & Resources</text>
+      
+      <!-- Highlight proxy config tools -->
+      <rect x="50" y="50" width="600" height="30" rx="4" ry="4" fill="#e64980" stroke="#c2255c" stroke-width="1" opacity="0.8" />
+      <text x="350" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#fff">Proxy Configuration Tools (get-proxy-config, set-proxy-config...)</text>
+    </g>
+    
+    <!-- Arrow to APIs -->
+    <line x1="390" y1="370" x2="390" y2="410" stroke="#adb5bd" stroke-width="2.5" marker-end="url(#arrowhead)" />
+  </g>
+  
+  <!-- Proxy Integration Highlight -->
+  <g transform="translate(150, 630)">
+    <rect x="0" y="0" width="600" height="50" rx="8" ry="8" fill="#f8f9fa" stroke="#ced4da" stroke-width="2" />
+    <text x="300" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#495057">Enhanced Proxy Configuration with Integrated URL Format</text>
+  </g>
+  
+  <!-- Legend with more spacing -->
+  <g transform="translate(60, 580)">
+    <rect x="0" y="0" width="30" height="20" fill="#4dabf7" opacity="0.8" />
+    <text x="40" y="15" font-family="Arial, sans-serif" font-size="16" fill="#495057">Exchange Management</text>
+    
+    <rect x="250" y="0" width="30" height="20" fill="#20c997" opacity="0.8" />
+    <text x="290" y="15" font-family="Arial, sans-serif" font-size="16" fill="#495057">Utilities</text>
+    
+    <rect x="400" y="0" width="30" height="20" fill="#ffa94d" opacity="0.8" />
+    <text x="440" y="15" font-family="Arial, sans-serif" font-size="16" fill="#495057">API Tools</text>
+    
+    <rect x="550" y="0" width="30" height="20" fill="#748ffc" opacity="0.8" />
+    <text x="590" y="15" font-family="Arial, sans-serif" font-size="16" fill="#495057">Core Files</text>
+    
+    <rect x="700" y="0" width="30" height="20" fill="#e64980" opacity="0.8" />
+    <text x="740" y="15" font-family="Arial, sans-serif" font-size="16" fill="#495057">New in v1.2.1</text>
+  </g>
+  
+  <!-- Arrowhead marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#adb5bd" />
+    </marker>
+  </defs>
+</svg>
