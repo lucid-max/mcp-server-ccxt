@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.2.2 (2025-06-03)
+
+### Added Exchange Passphrase Support
+- Added passphrase parameter to all private API tools
+- Added environment variable support for exchange passphrases
+- Updated exchange manager to handle passphrases (required by some exchanges like KuCoin)
+- Updated documentation with passphrase configuration examples
+- Implemented passphrase as an optional parameter to maintain compatibility
+
 ## v1.2.1 (2025-04-01)
 
 ### Improved Proxy Configuration

@@ -105,6 +105,10 @@ npm start
    # API credentials (optional)
    BINANCE_API_KEY=your_api_key
    BINANCE_SECRET=your_api_secret
+   # For exchanges requiring passphrase (e.g., KuCoin)
+   KUCOIN_API_KEY=your_kucoin_api_key
+   KUCOIN_SECRET=your_kucoin_secret
+   KUCOIN_PASSPHRASE=your_kucoin_passphrase
    
    # Proxy configuration (optional)
    USE_PROXY=false

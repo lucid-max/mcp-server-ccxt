@@ -126,6 +126,7 @@ export function getExchangeWithMarketType(exchangeId?: string, marketType: Marke
     
     const apiKey = process.env[`${id.toUpperCase()}_API_KEY`];
     const secret = process.env[`${id.toUpperCase()}_SECRET`];
+    const passphrase = process.env[`${id.toUpperCase()}_PASSPHRASE`];
     
     try {
       log(LogLevel.INFO, `Initializing exchange: ${id} (${type})`);
@@ -139,6 +140,11 @@ export function getExchangeWithMarketType(exchangeId?: string, marketType: Marke
         enableRateLimit: true,
         options: {}
       };
+      
+      // Add passphrase if provided (required for exchanges like KuCoin)
+      if (passphrase) {
+        options.password = passphrase;
+      }
       
       // Configure market type specifics
       if (type !== MarketType.SPOT) {
@@ -167,19 +173,24 @@ export function getExchangeWithMarketType(exchangeId?: string, marketType: Marke
  * @param exchangeId Exchange ID
  * @param apiKey API key
  * @param secret API secret
+ * @param marketType Market type (spot, future, etc.)
+ * @param passphrase Passphrase for authentication (required for some exchanges like KuCoin)
  * @returns Exchange instance
  * 
  * 使用特定凭据获取交易所实例
  * @param exchangeId 交易所ID
  * @param apiKey API密钥
  * @param secret API密钥秘密
+ * @param marketType 市场类型（现货、期货等）
+ * @param passphrase 认证密码（某些交易所如KuCoin需要）
  * @returns 交易所实例
  */
 export function getExchangeWithCredentials(
   exchangeId: string,
   apiKey: string,
   secret: string,
-  marketType: MarketType | string = MarketType.SPOT
+  marketType: MarketType | string = MarketType.SPOT,
+  passphrase?: string
 ): ccxt.Exchange {
   try {
     if (!SUPPORTED_EXCHANGES.includes(exchangeId)) {
@@ -195,6 +206,11 @@ export function getExchangeWithCredentials(
       enableRateLimit: true,
       options: {}
     };
+    
+    // Add passphrase if provided (required for exchanges like KuCoin)
+    if (passphrase) {
+      options.password = passphrase;
+    }
     
     // Configure market type specifics
     if (type !== MarketType.SPOT) {

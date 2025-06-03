@@ -18,12 +18,13 @@ export function registerPrivateTools(server: McpServer) {
     exchange: z.string().describe("Exchange ID (e.g., binance, coinbase)"),
     apiKey: z.string().describe("API key for authentication"),
     secret: z.string().describe("API secret for authentication"),
+    passphrase: z.string().optional().describe("Passphrase for authentication (required for some exchanges like KuCoin)"),
     marketType: z.enum(["spot", "future", "swap", "option", "margin"]).optional().describe("Market type (default: spot)")
-  }, async ({ exchange, apiKey, secret, marketType }) => {
+  }, async ({ exchange, apiKey, secret, passphrase, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
         // Get exchange with market type
-        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType);
+        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType, passphrase);
         
         // Fetch balance
         log(LogLevel.INFO, `Fetching account balance for ${exchange}`);
@@ -65,12 +66,13 @@ export function registerPrivateTools(server: McpServer) {
     amount: z.number().positive().describe("Amount to buy/sell"),
     apiKey: z.string().describe("API key for authentication"),
     secret: z.string().describe("API secret for authentication"),
+    passphrase: z.string().optional().describe("Passphrase for authentication (required for some exchanges like KuCoin)"),
     marketType: z.enum(["spot", "future", "swap", "option", "margin"]).optional().describe("Market type (default: spot)")
-  }, async ({ exchange, symbol, side, amount, apiKey, secret, marketType }) => {
+  }, async ({ exchange, symbol, side, amount, apiKey, secret, passphrase, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
         // Get exchange with market type
-        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType);
+        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType, passphrase);
         
         // Place market order
         log(LogLevel.INFO, `Placing ${side} market order for ${symbol} on ${exchange}, amount: ${amount}`);
@@ -103,12 +105,13 @@ export function registerPrivateTools(server: McpServer) {
     leverage: z.number().positive().describe("Leverage value"),
     apiKey: z.string().describe("API key for authentication"),
     secret: z.string().describe("API secret for authentication"),
+    passphrase: z.string().optional().describe("Passphrase for authentication (required for some exchanges like KuCoin)"),
     marketType: z.enum(["future", "swap"]).default("future").describe("Market type (default: future)")
-  }, async ({ exchange, symbol, leverage, apiKey, secret, marketType }) => {
+  }, async ({ exchange, symbol, leverage, apiKey, secret, passphrase, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
         // Get futures exchange
-        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType);
+        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType, passphrase);
         
         // Set leverage
         log(LogLevel.INFO, `Setting leverage to ${leverage}x for ${symbol} on ${exchange} (${marketType})`);
@@ -141,12 +144,13 @@ export function registerPrivateTools(server: McpServer) {
     marginMode: z.enum(["cross", "isolated"]).describe("Margin mode: cross or isolated"),
     apiKey: z.string().describe("API key for authentication"),
     secret: z.string().describe("API secret for authentication"),
+    passphrase: z.string().optional().describe("Passphrase for authentication (required for some exchanges like KuCoin)"),
     marketType: z.enum(["future", "swap"]).default("future").describe("Market type (default: future)")
-  }, async ({ exchange, symbol, marginMode, apiKey, secret, marketType }) => {
+  }, async ({ exchange, symbol, marginMode, apiKey, secret, passphrase, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
         // Get futures exchange
-        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType);
+        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType, passphrase);
         
         // Set margin mode
         log(LogLevel.INFO, `Setting margin mode to ${marginMode} for ${symbol} on ${exchange} (${marketType})`);
@@ -181,12 +185,13 @@ export function registerPrivateTools(server: McpServer) {
     params: z.record(z.any()).optional().describe("Additional order parameters"),
     apiKey: z.string().describe("API key for authentication"),
     secret: z.string().describe("API secret for authentication"),
+    passphrase: z.string().optional().describe("Passphrase for authentication (required for some exchanges like KuCoin)"),
     marketType: z.enum(["future", "swap"]).default("future").describe("Market type (default: future)")
-  }, async ({ exchange, symbol, side, amount, params, apiKey, secret, marketType }) => {
+  }, async ({ exchange, symbol, side, amount, params, apiKey, secret, passphrase, marketType }) => {
     try {
       return await rateLimiter.execute(exchange, async () => {
         // Get futures exchange
-        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType);
+        const ex = getExchangeWithCredentials(exchange, apiKey, secret, marketType, passphrase);
         
         // Place futures market order
         log(LogLevel.INFO, `Placing futures ${side} market order for ${symbol} on ${exchange} (${marketType}), amount: ${amount}`);
