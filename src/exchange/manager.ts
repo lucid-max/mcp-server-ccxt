@@ -199,17 +199,40 @@ export function getExchangeWithCredentials(
     
     const type = marketType || DEFAULT_MARKET_TYPE;
     
+    // Handle "from_env" values by looking up environment variables
+    let actualApiKey = apiKey;
+    let actualSecret = secret;
+    let actualPassphrase = passphrase;
+    
+    if (apiKey === 'from_env') {
+      actualApiKey = process.env[`${exchangeId.toUpperCase()}_API_KEY`] || '';
+      if (!actualApiKey) {
+        throw new Error(`Environment variable ${exchangeId.toUpperCase()}_API_KEY not found`);
+      }
+    }
+    
+    if (secret === 'from_env') {
+      actualSecret = process.env[`${exchangeId.toUpperCase()}_SECRET`] || '';
+      if (!actualSecret) {
+        throw new Error(`Environment variable ${exchangeId.toUpperCase()}_SECRET not found`);
+      }
+    }
+    
+    if (passphrase === 'from_env') {
+      actualPassphrase = process.env[`${exchangeId.toUpperCase()}_PASSPHRASE`];
+    }
+    
     // Configure options with possible proxy
     const options: any = {
-      apiKey,
-      secret,
+      apiKey: actualApiKey,
+      secret: actualSecret,
       enableRateLimit: true,
       options: {}
     };
     
     // Add passphrase if provided (required for exchanges like KuCoin)
-    if (passphrase) {
-      options.password = passphrase;
+    if (actualPassphrase) {
+      options.password = actualPassphrase;
     }
     
     // Configure market type specifics
