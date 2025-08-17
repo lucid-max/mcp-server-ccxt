@@ -170,19 +170,19 @@ server.tool("clear-cache", "Clear CCXT cache", {}, async () => {
   };
 });
 
-// Log level management
-// 日志级别管理
-server.tool("set-log-level", "Set logging level", {
-  level: z.enum(["debug", "info", "warning", "error"]).describe("Logging level to set")
-}, async ({ level }) => {
-  setLogLevel(level);
-  return {
-    content: [{
-      type: "text",
-      text: `Log level set to ${level}.`
-    }]
-  };
-});
+// // Log level management
+// // 日志级别管理
+// server.tool("set-log-level", "Set logging level", {
+//   level: z.enum(["debug", "info", "warning", "error"]).describe("Logging level to set")
+// }, async ({ level }) => {
+//   setLogLevel(level);
+//   return {
+//     content: [{
+//       type: "text",
+//       text: `Log level set to ${level}.`
+//     }]
+//   };
+// });
 
 // Start the server
 // 启动服务器
